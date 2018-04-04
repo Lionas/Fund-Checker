@@ -1,4 +1,4 @@
-package jp.lionas.alexa.sample.java;
+package jp.lionas.alexa.fundra;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
@@ -8,20 +8,18 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class HelpIntentHandler implements RequestHandler {
+public class CancelandStopIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(intentName("AMAZON.HelpIntent"));
+        return handlerInput.matches(intentName("AMAZON.StopIntent").or(intentName("AMAZON.CancelIntent")));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
-        String speechText = "You can say hello to me!";
         return handlerInput.getResponseBuilder()
-                .withSpeech(speechText)
-                .withSimpleCard("HelloWorld", speechText)
-                .withReprompt(speechText)
+                .withSpeech(Const.CANCEL_SPEECH_TEXT)
+                .withSimpleCard(Const.SKILL_NAME, Const.CANCEL_SPEECH_TEXT)
                 .build();
     }
 

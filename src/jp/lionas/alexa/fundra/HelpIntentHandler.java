@@ -1,25 +1,26 @@
-package jp.lionas.alexa.sample.java;
+package jp.lionas.alexa.fundra;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
-import com.amazon.ask.request.Predicates;
 
 import java.util.Optional;
 
-public class HelloWorldIntentHandler implements RequestHandler {
+import static com.amazon.ask.request.Predicates.intentName;
+
+public class HelpIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(Predicates.intentName("HelloWorldIntent"));
+        return handlerInput.matches(intentName("AMAZON.HelpIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
-        String speechText = "Hello world";
         return handlerInput.getResponseBuilder()
-                .withSpeech(speechText)
-                .withSimpleCard("HelloWorld", speechText)
+                .withSpeech(Const.HELP_SPEECH_TEXT)
+                .withSimpleCard(Const.SKILL_NAME, Const.HELP_SPEECH_TEXT)
+                .withReprompt(Const.HELP_SPEECH_TEXT)
                 .build();
     }
 

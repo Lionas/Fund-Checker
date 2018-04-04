@@ -1,23 +1,23 @@
-package jp.lionas.alexa.sample.java;
+package jp.lionas.alexa.fundra;
 
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
 
-public class HelloWorldStreamHandler extends SkillStreamHandler {
+public class FundraStreamHandler extends SkillStreamHandler {
 
     private static Skill getSkill() {
         return Skills.standard()
                 .addRequestHandlers(
                         new CancelandStopIntentHandler(),
-                        new HelloWorldIntentHandler(),
+                        new FundraIntentHandler(),
                         new HelpIntentHandler(),
                         new LaunchRequestHandler(),
                         new SessionEndedRequestHandler())
                 .build();
     }
 
-    public HelloWorldStreamHandler() {
+    public FundraStreamHandler() {
         super(getSkill());
     }
 }
