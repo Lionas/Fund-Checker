@@ -16,7 +16,7 @@ public class FundraIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(Predicates.intentName("FundraIntent"));
+        return handlerInput.matches(Predicates.intentName(Const.INTENT_NAME));
     }
 
     @Override
@@ -29,14 +29,14 @@ public class FundraIntentHandler implements RequestHandler {
 
         String spoken = "";
         if(slots != null) {
-            spoken = slots.get("name").getValue();
+            spoken = slots.get(Const.QUERY_FUND_NAME).getValue();
         }
 
         String speechText = getLatestFundStatuses(spoken);
 
         return handlerInput.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("HelloWorld", speechText)
+                .withSimpleCard(Const.SKILL_NAME, speechText)
                 .build();
     }
 

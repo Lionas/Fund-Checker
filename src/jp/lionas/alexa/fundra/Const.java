@@ -8,4 +8,7 @@ public class Const {
             "調べたいファンド名の後に「知りたい」と話してください。例えば、日経225が知りたい。のように話してください。";
     public static final String CANCEL_SPEECH_TEXT = "またのご利用をお待ちしております。";
 
+    // 変数
+    public static final String INTENT_NAME = "FundraIntent";
+    public static final String QUERY_FUND_NAME = "queryFundName";
 }
