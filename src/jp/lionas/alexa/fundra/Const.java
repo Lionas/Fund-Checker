@@ -30,7 +30,7 @@ public class Const {
     public static final String STATE_REPEAT = "repeat";
     public static final String STATE_END = "end";
     public static final String INDEX_KEY = "index";
-    public static final String FOUND_ITEMS_KEY = "foundItems";
+    public static final String FUND_NAME = "fundName";
 
     // TODO 後で別ファイルにする
     // 変数

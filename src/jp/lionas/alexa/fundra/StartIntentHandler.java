@@ -35,6 +35,7 @@ public class StartIntentHandler implements RequestHandler {
         Map<String, Slot> slots = SlotUtil.getSlots(handlerInput);
         if(slots != null) {
             fundName = slots.get(Const.QUERY_FUND_NAME).getValue();
+            sessionAttributes.put(Const.FUND_NAME, fundName);
         }
 
         List<CodeItem> found = MufgFund.findFund(fundName);

@@ -67,9 +67,6 @@ public class FundUtil {
         if(targetIndex < found.size()-1) {
             // 最後の要素でない場合
             sessionAttributes.put(Const.STATE_KEY, Const.STATE_REPEAT);
-            Gson gson = new Gson();
-            String foundStr = gson.toJson(found);
-            sessionAttributes.put(Const.FOUND_ITEMS_KEY, foundStr);
             speechText += FundUtil.getLatestFundStatus(found.get(targetIndex));
             speechText += Const.ASK_NEXT;
             return handlerInput.getResponseBuilder()

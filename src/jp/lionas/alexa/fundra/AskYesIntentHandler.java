@@ -5,6 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.google.gson.Gson;
 import jp.lionas.alexa.fundra.mufg.FundUtil;
+import jp.lionas.alexa.fundra.mufg.MufgFund;
 import jp.lionas.alexa.fundra.mufg.model.CodeItem;
 
 import java.util.*;
@@ -24,12 +25,11 @@ public class AskYesIntentHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput handlerInput) {
 
         Map<String, Object> sessionAttributes = handlerInput.getAttributesManager().getSessionAttributes();
-        Gson gson = new Gson();
-        CodeItem[] found = gson.fromJson((String)sessionAttributes.get(Const.FOUND_ITEMS_KEY), CodeItem[].class);
-        List<CodeItem> foundList = Arrays.asList(found);
+        String fundName = (String)sessionAttributes.get(Const.FUND_NAME);
+        List<CodeItem> found = MufgFund.findFund(fundName);
 
         // 複数マッチした場合
-        return FundUtil.getRepeatedFunds(handlerInput, sessionAttributes, foundList);
+        return FundUtil.getRepeatedFunds(handlerInput, sessionAttributes, found);
 
     }
 
