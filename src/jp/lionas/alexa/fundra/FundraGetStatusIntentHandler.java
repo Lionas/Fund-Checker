@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class FundraIntentHandler implements RequestHandler {
+public class FundraGetStatusIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
@@ -22,17 +22,13 @@ public class FundraIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
 
-        Request request = handlerInput.getRequestEnvelope().getRequest();
-        IntentRequest intentRequest = (IntentRequest) request;
-        Intent intent = intentRequest.getIntent();
-        Map<String, Slot> slots = intent.getSlots();
-
-        String spoken = "";
+        String fundName = "";
+        Map<String, Slot> slots = SlotUtil.getSlots(handlerInput);
         if(slots != null) {
-            spoken = slots.get(Const.QUERY_FUND_NAME).getValue();
+            fundName = slots.get(Const.QUERY_FUND_NAME).getValue();
         }
 
-        String speechText = getLatestFundStatuses(spoken);
+        String speechText = getLatestFundStatuses(fundName);
 
         return handlerInput.getResponseBuilder()
                 .withSpeech(speechText)
@@ -40,19 +36,23 @@ public class FundraIntentHandler implements RequestHandler {
                 .build();
     }
 
-    private String getLatestFundStatuses(String spoken) {
+    private String getLatestFundStatuses(String fundName) {
 
-        StringBuilder result = new StringBuilder();
+        String result = "";
         final String NO_DATA =
-                (spoken != null && !spoken.isEmpty()) ? spoken + "の情報はありません" : "指定の銘柄の情報はありません";
+                (fundName != null && !fundName.isEmpty()) ? String.format(Const.NOT_FOUND, fundName) : Const.NO_SPOKEN;
 
         try {
-            List<CodeItem> found = MufgFund.findFund(spoken);
+            List<CodeItem> found = MufgFund.findFund(fundName);
             if(found == null || found.size() == 0) {
                 return NO_DATA;
             }
 
-            // TODO 複数マッチした場合の対応を考える
+            // 複数マッチした場合
+            if(found.size() > 1) {
+                result = String.format(Const.FOUND_MULTIPLE, found.size());
+            }
+
             CodeItem item = found.get(0);
             List<FundItem> funds = MufgFund.getLatestFund(item.getFundCode());
             if(funds == null || funds.isEmpty()) {
@@ -60,20 +60,17 @@ public class FundraIntentHandler implements RequestHandler {
             }
 
             FundItem fundItem = funds.get(0);
-            result.append(fundItem.getFundName())
-                    .append("の価格は")
-                    .append(fundItem.getNav())
-                    .append("円です。")
-                    .append("前日比")
-                    .append(fundItem.getCmpPrevDay() >= 0 ? "プラス" : "マイナス")
-                    .append(Math.abs(fundItem.getCmpPrevDay()))
-                    .append("円です。");
+            result += String.format(Const.STATUS_MESSAGE,
+                    fundItem.getFundName(),
+                    fundItem.getNav(),
+                    fundItem.getCmpPrevDay() >= 0 ? Const.PLUS : Const.MINUS,
+                    Math.abs(fundItem.getCmpPrevDay()));
 
         } catch (Exception e) {
-            return "情報の取得に失敗しました。";
+            return Const.ERROR;
         }
 
-        return result.toString();
+        return result;
 
     }
 
