@@ -12,3 +12,13 @@ https://www.am.mufg.jp/tool/webapi/agreement.html
 
 # Copyright
 All rights including copyright and other intellectual property rights on information provided in this service belong to Mitsubishi UFJ INTERNATIONAL INFRASTRUCTURE CO., LTD., Or a third party with copyright.
+
+# Status
+- START
+- REPEAT
+- END
+
+# Intent
+- StartIntent
+- AskYesIntent
+- AskNoIntent
