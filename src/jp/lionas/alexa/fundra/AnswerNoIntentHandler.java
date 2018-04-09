@@ -10,7 +10,7 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
 
-public class AskNoIntentHandler implements RequestHandler {
+public class AnswerNoIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {

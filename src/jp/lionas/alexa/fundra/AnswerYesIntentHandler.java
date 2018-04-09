@@ -2,18 +2,19 @@ package jp.lionas.alexa.fundra;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.*;
-import com.google.gson.Gson;
+import com.amazon.ask.model.Response;
 import jp.lionas.alexa.fundra.mufg.FundUtil;
 import jp.lionas.alexa.fundra.mufg.MufgFund;
 import jp.lionas.alexa.fundra.mufg.model.CodeItem;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
 
-public class AskYesIntentHandler implements RequestHandler {
+public class AnswerYesIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
@@ -25,7 +26,7 @@ public class AskYesIntentHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput handlerInput) {
 
         Map<String, Object> sessionAttributes = handlerInput.getAttributesManager().getSessionAttributes();
-        String fundName = (String)sessionAttributes.get(Const.FUND_NAME);
+        String fundName = (String) sessionAttributes.get(Const.FUND_NAME);
         List<CodeItem> found = MufgFund.findFund(fundName);
 
         // 複数マッチした場合
