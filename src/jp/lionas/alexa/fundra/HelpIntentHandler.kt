@@ -7,6 +7,7 @@ import com.amazon.ask.model.Response
 import java.util.Optional
 
 import com.amazon.ask.request.Predicates.intentName
+import jp.lionas.alexa.fundra.def.Message
 
 class HelpIntentHandler : RequestHandler {
 
@@ -16,9 +17,9 @@ class HelpIntentHandler : RequestHandler {
 
     override fun handle(handlerInput: HandlerInput): Optional<Response> {
         return handlerInput.responseBuilder
-                .withSpeech(Const.HELP_SPEECH_TEXT)
-                .withSimpleCard(Const.SKILL_NAME, Const.HELP_SPEECH_TEXT)
-                .withReprompt(Const.HELP_SPEECH_TEXT)
+                .withSpeech(Message.HELP_SPEECH_TEXT)
+                .withSimpleCard(Message.SKILL_NAME, Message.HELP_SPEECH_TEXT)
+                .withReprompt(Message.HELP_SPEECH_TEXT)
                 .build()
     }
 

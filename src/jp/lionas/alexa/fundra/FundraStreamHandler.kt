@@ -10,7 +10,7 @@ class FundraStreamHandler() : SkillStreamHandler(skill) {
         val skill: Skill
             get() = Skills.standard()
                     .addRequestHandlers(
-                            CancelandStopIntentHandler(),
+                            CancelAndStopIntentHandler(),
                             StartIntentHandler(),
                             AnswerYesIntentHandler(),
                             AnswerNoIntentHandler(),

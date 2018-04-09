@@ -1,6 +1,6 @@
-package jp.lionas.alexa.fundra
+package jp.lionas.alexa.fundra.def
 
-class Const {
+class Message {
 
     companion object {
 
@@ -17,25 +17,6 @@ class Const {
         internal const val NOT_FOUND = "%sの情報はありません。"
         internal const val FOUND_MULTIPLE = "全部で%d件の情報が見つかりました。最初の1件をお伝えします。"
         internal const val ASK_NEXT = "次の情報を確認しますか？"
-
-        // TODO 後で別ファイルにする
-        // インテント
-        internal const val START_INTENT_NAME = "StartIntent"
-        internal const val ANSWER_YES_INTENT_NAME = "AnswerYesIntent"
-        internal const val ANSWER_NO_INTENT_NAME = "AnswerNoIntent"
-
-        // TODO
-        // 状態
-        internal const val STATE_KEY = "state"
-        internal const val STATE_START = "start"
-        internal const val STATE_REPEAT = "repeat"
-        internal const val STATE_END = "end"
-        internal const val INDEX_KEY = "index"
-        internal const val FUND_NAME = "fundName"
-
-        // TODO 後で別ファイルにする
-        // 変数
-        internal const val QUERY_FUND_NAME = "queryFundName"
 
     }
 

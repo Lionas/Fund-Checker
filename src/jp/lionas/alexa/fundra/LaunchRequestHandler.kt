@@ -5,6 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler
 import com.amazon.ask.model.LaunchRequest
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates
+import jp.lionas.alexa.fundra.def.Message
 
 import java.util.Optional
 
@@ -16,9 +17,9 @@ class LaunchRequestHandler : RequestHandler {
 
     override fun handle(handlerInput: HandlerInput): Optional<Response> {
         return handlerInput.responseBuilder
-                .withSpeech(Const.LAUNCH_SPEECH_TEXT)
-                .withSimpleCard(Const.SKILL_NAME, Const.LAUNCH_SPEECH_TEXT)
-                .withReprompt(Const.LAUNCH_SPEECH_TEXT)
+                .withSpeech(Message.LAUNCH_SPEECH_TEXT)
+                .withSimpleCard(Message.SKILL_NAME, Message.LAUNCH_SPEECH_TEXT)
+                .withReprompt(Message.LAUNCH_SPEECH_TEXT)
                 .build()
     }
 

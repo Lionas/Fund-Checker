@@ -75,7 +75,7 @@ class MufgFund {
 
             if (items != null && !items.isEmpty()) {
                 for (item in items) {
-                    var replacedFundName = ""
+                    var replacedFundName: String
                     item.fundName?.let {
                         replacedFundName = it
                                 .replace("[？！”＃＄％＆’（）・＜＞＿｜〜＋＊＝＾￥：；「」｛｝、。]".toRegex(), "")

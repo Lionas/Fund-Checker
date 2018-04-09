@@ -7,22 +7,25 @@ import java.util.Optional
 
 import com.amazon.ask.request.Predicates.intentName
 import com.amazon.ask.request.Predicates.sessionAttribute
+import jp.lionas.alexa.fundra.def.Message
+import jp.lionas.alexa.fundra.def.Intent
+import jp.lionas.alexa.fundra.def.State
 
 class AnswerNoIntentHandler : RequestHandler {
 
     override fun canHandle(handlerInput: HandlerInput): Boolean {
-        return handlerInput.matches(intentName(Const.ANSWER_NO_INTENT_NAME)
-                .and(sessionAttribute(Const.STATE_KEY, Const.STATE_END).negate()))
+        return handlerInput.matches(intentName(Intent.ANSWER_NO_INTENT_NAME)
+                .and(sessionAttribute(State.STATE_KEY, State.STATE_END).negate()))
     }
 
     override fun handle(handlerInput: HandlerInput): Optional<Response> {
 
         val sessionAttributes = handlerInput.attributesManager.sessionAttributes
-        sessionAttributes[Const.STATE_KEY] = Const.STATE_END
+        sessionAttributes[State.STATE_KEY] = State.STATE_END
 
         return handlerInput.responseBuilder
-                .withSpeech(Const.CANCEL_SPEECH_TEXT)
-                .withSimpleCard(Const.SKILL_NAME, Const.CANCEL_SPEECH_TEXT)
+                .withSpeech(Message.CANCEL_SPEECH_TEXT)
+                .withSimpleCard(Message.SKILL_NAME, Message.CANCEL_SPEECH_TEXT)
                 .withShouldEndSession(true)
                 .build()
 

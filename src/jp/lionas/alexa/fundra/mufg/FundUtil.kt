@@ -2,9 +2,9 @@ package jp.lionas.alexa.fundra.mufg
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import com.amazon.ask.model.Response
-import jp.lionas.alexa.fundra.Const
+import jp.lionas.alexa.fundra.def.Message
+import jp.lionas.alexa.fundra.def.State
 import jp.lionas.alexa.fundra.mufg.model.CodeItem
-import jp.lionas.alexa.fundra.mufg.model.FundItem
 import java.util.Optional
 
 object FundUtil {
@@ -17,19 +17,19 @@ object FundUtil {
             fundCode?.let{
                 val funds = MufgFund.getLatestFund(it)
                 if (funds == null || funds.isEmpty()) {
-                    return Const.ERROR
+                    return Message.ERROR
                 }
 
                 val fundItem = funds[0]
-                return String.format(Const.STATUS_MESSAGE,
+                return String.format(Message.STATUS_MESSAGE,
                         fundItem.fundName,
                         fundItem.nav,
-                        if (fundItem.cmpPrevDay >= 0) Const.PLUS else Const.MINUS,
+                        if (fundItem.cmpPrevDay >= 0) Message.PLUS else Message.MINUS,
                         Math.abs(fundItem.cmpPrevDay))
             }
 
         } catch (e: Exception) {
-            return Const.ERROR
+            return Message.ERROR
         }
 
         return ""
@@ -41,11 +41,11 @@ object FundUtil {
                     lastItem: CodeItem): Optional<Response> {
 
         // 1件だけマッチした場合
-        sessionAttributes[Const.STATE_KEY] = Const.STATE_END
+        sessionAttributes[State.STATE_KEY] = State.STATE_END
         val speechText = FundUtil.getLatestFundStatus(lastItem)
         return handlerInput.responseBuilder
                 .withSpeech(speechText)
-                .withSimpleCard(Const.SKILL_NAME, speechText)
+                .withSimpleCard(Message.SKILL_NAME, speechText)
                 .withShouldEndSession(true)
                 .build()
 
@@ -56,21 +56,21 @@ object FundUtil {
                          found: List<CodeItem>): Optional<Response> {
 
         var speechText = ""
-        val targetIndex = sessionAttributes[Const.INDEX_KEY] as Int
+        val targetIndex = sessionAttributes[State.INDEX_KEY] as Int
         if (targetIndex == 0) {
-            speechText += String.format(Const.FOUND_MULTIPLE, found.size)
+            speechText += String.format(Message.FOUND_MULTIPLE, found.size)
         }
-        sessionAttributes[Const.INDEX_KEY] = targetIndex + 1
+        sessionAttributes[State.INDEX_KEY] = targetIndex + 1
 
         return if (targetIndex < found.size - 1) {
             // 最後の要素でない場合
-            sessionAttributes[Const.STATE_KEY] = Const.STATE_REPEAT
+            sessionAttributes[State.STATE_KEY] = State.STATE_REPEAT
             speechText += FundUtil.getLatestFundStatus(found[targetIndex])
-            speechText += Const.ASK_NEXT
+            speechText += Message.ASK_NEXT
             handlerInput.responseBuilder
                     .withSpeech(speechText)
-                    .withSimpleCard(Const.SKILL_NAME, speechText)
-                    .withReprompt(Const.ASK_NEXT)
+                    .withSimpleCard(Message.SKILL_NAME, speechText)
+                    .withReprompt(Message.ASK_NEXT)
                     .withShouldEndSession(false)
                     .build()
         } else {
