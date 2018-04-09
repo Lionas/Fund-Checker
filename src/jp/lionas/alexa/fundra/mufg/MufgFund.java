@@ -68,9 +68,11 @@ public class MufgFund {
         List<CodeItem> result = new ArrayList<>();
         List<CodeItem> items = getCodeList();
 
-        if(items != null && !items.isEmpty()) {
-            for(CodeItem item : items) {
-                if(item.getFundName().contains(name)) {
+        if (items != null && !items.isEmpty()) {
+            for (CodeItem item : items) {
+                String fundName = item.getFundName()
+                        .replaceAll("[？！”＃＄％＆’（）・＜＞＿｜〜＋ー＊＝＾￥：；「」｛｝、。]", "");
+                if (fundName.contains(name)) {
                     result.add(item);
                 }
             }
