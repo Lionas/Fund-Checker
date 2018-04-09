@@ -20,5 +20,5 @@ All rights including copyright and other intellectual property rights on informa
 
 # Intent
 - StartIntent
-- AskYesIntent
-- AskNoIntent
+- AnswerYesIntent
+- AnswerNoIntent
