@@ -8,13 +8,12 @@ import java.util.Optional
 import com.amazon.ask.request.Predicates.intentName
 import com.amazon.ask.request.Predicates.sessionAttribute
 import jp.lionas.alexa.fundra.def.Message
-import jp.lionas.alexa.fundra.def.Intent
 import jp.lionas.alexa.fundra.def.State
 
 class AnswerNoIntentHandler : RequestHandler {
 
     override fun canHandle(handlerInput: HandlerInput): Boolean {
-        return handlerInput.matches(intentName(Intent.ANSWER_NO_INTENT_NAME)
+        return handlerInput.matches(intentName("AMAZON.NoIntent")
                 .and(sessionAttribute(State.STATE_KEY, State.STATE_END).negate()))
     }
 

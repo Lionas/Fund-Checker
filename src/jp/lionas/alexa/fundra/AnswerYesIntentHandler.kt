@@ -5,7 +5,6 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler
 import com.amazon.ask.model.Response
 import com.amazon.ask.request.Predicates.intentName
 import com.amazon.ask.request.Predicates.sessionAttribute
-import jp.lionas.alexa.fundra.def.Intent
 import jp.lionas.alexa.fundra.def.State
 import jp.lionas.alexa.fundra.mufg.FundUtil
 import jp.lionas.alexa.fundra.mufg.MufgFund
@@ -14,7 +13,7 @@ import java.util.*
 class AnswerYesIntentHandler : RequestHandler {
 
     override fun canHandle(handlerInput: HandlerInput): Boolean {
-        return handlerInput.matches(intentName(Intent.ANSWER_YES_INTENT_NAME)
+        return handlerInput.matches(intentName("AMAZON.YesIntent")
                 .and(sessionAttribute(State.STATE_KEY, State.STATE_REPEAT)))
     }
 
