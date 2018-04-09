@@ -70,9 +70,17 @@ public class MufgFund {
 
         if (items != null && !items.isEmpty()) {
             for (CodeItem item : items) {
-                String fundName = item.getFundName()
+                String replacedFundName = item.getFundName()
                         .replaceAll("[？！”＃＄％＆’（）・＜＞＿｜〜＋ー＊＝＾￥：；「」｛｝、。]", "");
-                if (fundName.contains(name)) {
+
+                System.out.println(
+                        String.format("original(api) = %s, replaced = %s, voice = %s",
+                                item.getFundName(),
+                                replacedFundName,
+                                name)
+                );
+
+                if (replacedFundName.contains(name)) {
                     result.add(item);
                 }
             }
