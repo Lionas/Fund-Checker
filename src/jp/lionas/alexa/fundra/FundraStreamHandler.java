@@ -11,8 +11,8 @@ public class FundraStreamHandler extends SkillStreamHandler {
                 .addRequestHandlers(
                         new CancelandStopIntentHandler(),
                         new StartIntentHandler(),
-                        new AskYesIntentHandler(),
-                        new AskNoIntentHandler(),
+                        new AnswerYesIntentHandler(),
+                        new AnswerNoIntentHandler(),
                         new HelpIntentHandler(),
                         new LaunchRequestHandler(),
                         new SessionEndedRequestHandler())
