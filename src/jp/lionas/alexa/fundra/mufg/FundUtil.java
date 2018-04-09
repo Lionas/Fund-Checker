@@ -2,7 +2,6 @@ package jp.lionas.alexa.fundra.mufg;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
-import com.google.gson.Gson;
 import jp.lionas.alexa.fundra.Const;
 import jp.lionas.alexa.fundra.mufg.model.CodeItem;
 import jp.lionas.alexa.fundra.mufg.model.FundItem;
@@ -19,7 +18,7 @@ public class FundUtil {
 
         try {
             List<FundItem> funds = MufgFund.getLatestFund(item.getFundCode());
-            if(funds == null || funds.isEmpty()) {
+            if (funds == null || funds.isEmpty()) {
                 return Const.ERROR;
             }
 
@@ -59,12 +58,12 @@ public class FundUtil {
 
         String speechText = "";
         int targetIndex = (int) sessionAttributes.get(Const.INDEX_KEY);
-        if(targetIndex == 0) {
+        if (targetIndex == 0) {
             speechText += String.format(Const.FOUND_MULTIPLE, found.size());
         }
-        sessionAttributes.put(Const.INDEX_KEY, targetIndex+1);
+        sessionAttributes.put(Const.INDEX_KEY, targetIndex + 1);
 
-        if(targetIndex < found.size()-1) {
+        if (targetIndex < found.size() - 1) {
             // 最後の要素でない場合
             sessionAttributes.put(Const.STATE_KEY, Const.STATE_REPEAT);
             speechText += FundUtil.getLatestFundStatus(found.get(targetIndex));

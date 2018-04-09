@@ -2,7 +2,8 @@ package jp.lionas.alexa.fundra;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.*;
+import com.amazon.ask.model.Response;
+import com.amazon.ask.model.Slot;
 import jp.lionas.alexa.fundra.mufg.FundUtil;
 import jp.lionas.alexa.fundra.mufg.MufgFund;
 import jp.lionas.alexa.fundra.mufg.model.CodeItem;
@@ -33,7 +34,7 @@ public class StartIntentHandler implements RequestHandler {
 
         String fundName = "";
         Map<String, Slot> slots = SlotUtil.getSlots(handlerInput);
-        if(slots != null) {
+        if (slots != null) {
             fundName = slots.get(Const.QUERY_FUND_NAME).getValue();
             sessionAttributes.put(Const.FUND_NAME, fundName);
         }
@@ -42,14 +43,14 @@ public class StartIntentHandler implements RequestHandler {
         final String NO_DATA =
                 (fundName != null && !fundName.isEmpty()) ? String.format(Const.NOT_FOUND, fundName) : Const.NO_SPOKEN;
 
-        if(found == null || found.size() == 0) {
+        if (found == null || found.size() == 0) {
             // データが0件
             sessionAttributes.put(Const.STATE_KEY, Const.STATE_END);
             return handlerInput.getResponseBuilder()
                     .withSpeech(NO_DATA)
                     .withSimpleCard(Const.SKILL_NAME, NO_DATA)
                     .build();
-        } else if(found.size() == 1) {
+        } else if (found.size() == 1) {
             // 1件だけマッチした場合
             return FundUtil.getLastFund(handlerInput, sessionAttributes, found.get(0));
         } else {

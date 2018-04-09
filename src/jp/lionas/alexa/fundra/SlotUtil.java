@@ -15,9 +15,7 @@ class SlotUtil {
         Request request = handlerInput.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
-        Map<String, Slot> slots = intent.getSlots();
-
-        return slots;
+        return intent.getSlots();
 
     }
 
