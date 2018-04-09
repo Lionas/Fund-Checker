@@ -4,7 +4,7 @@ This skill uses [mutual fund API](https://www.am.mufg.jp/tool/webapi/) produced 
 
 # Usage(now only Japanese)
 以下のいずれかのフォーマットで発話してください。
-- <ファンド名>の情報が知りたい
+- <ファンド名>の情報
 - <ファンド名>が知りたい
 
 # Agreement
