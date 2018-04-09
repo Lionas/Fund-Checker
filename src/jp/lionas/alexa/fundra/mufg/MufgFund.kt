@@ -84,7 +84,7 @@ class MufgFund {
                             result.add(item)
                         }
                     }
-                    println(String.format("original(api) = %s, replaced = %s, voice = %s", item.fundName, replacedFundName, name))
+//                    println(String.format("original(api) = %s, replaced = %s, voice = %s", item.fundName, replacedFundName, name))
                 }
             }
 
