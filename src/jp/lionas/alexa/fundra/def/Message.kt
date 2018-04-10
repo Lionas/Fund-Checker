@@ -6,10 +6,10 @@ class Message {
 
         // メッセージ
         internal const val SKILL_NAME = "FundChecker"
-        internal const val LAUNCH_SPEECH_TEXT = "ファンドチェッカーへようこそ。"
+        internal const val LAUNCH_SPEECH_TEXT = "ファンドチェッカーへようこそ。どのファンドをお調べしますか？"
         internal const val HELP_SPEECH_TEXT =
                         "このスキルでは三菱UFJ国際投信が取り扱う、ファンドの投信情報をお調べします。" +
-                        "調べたいファンド名の後に「知りたい」と話してください。例えば「日経が知りたい。」のように話すと、" +
+                        "調べたいファンド名の後に「調べて」と話してください。例えば「日経調べて。」のように話すと、" +
                         "「日経」という名前を含む、全てのファンドの基準価額や前日比を一つずつお伝えできます。" +
                         "どのファンドをお調べしますか？"
         internal const val CANCEL_SPEECH_TEXT = "またのご利用をお待ちしております。"
