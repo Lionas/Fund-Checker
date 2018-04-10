@@ -1,10 +1,11 @@
-package jp.lionas.alexa.fundra.mufg
+package jp.lionas.alexa.fundra.util
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import com.amazon.ask.model.Response
+import jp.lionas.alexa.fundra.api.MufgFundApi
 import jp.lionas.alexa.fundra.def.Message
 import jp.lionas.alexa.fundra.def.State
-import jp.lionas.alexa.fundra.mufg.model.CodeItem
+import jp.lionas.alexa.fundra.model.CodeItem
 import java.util.Optional
 
 object FundUtil {
@@ -15,7 +16,7 @@ object FundUtil {
             val fundCode: String? = item.fundCode
 
             fundCode?.let{
-                val funds = MufgFund.getLatestFund(it)
+                val funds = MufgFundApi.getLatestFund(it)
                 if (funds == null || funds.isEmpty()) {
                     return Message.ERROR
                 }
@@ -42,7 +43,7 @@ object FundUtil {
 
         // 1件だけマッチした場合
         sessionAttributes[State.STATE_KEY] = State.STATE_END
-        val speechText = FundUtil.getLatestFundStatus(lastItem)
+        val speechText = getLatestFundStatus(lastItem)
         return handlerInput.responseBuilder
                 .withSpeech(speechText)
                 .withSimpleCard(Message.SKILL_NAME, speechText)
@@ -65,7 +66,7 @@ object FundUtil {
         return if (targetIndex < found.size - 1) {
             // 最後の要素でない場合
             sessionAttributes[State.STATE_KEY] = State.STATE_REPEAT
-            speechText += FundUtil.getLatestFundStatus(found[targetIndex])
+            speechText += getLatestFundStatus(found[targetIndex])
             speechText += Message.ASK_NEXT
             handlerInput.responseBuilder
                     .withSpeech(speechText)
