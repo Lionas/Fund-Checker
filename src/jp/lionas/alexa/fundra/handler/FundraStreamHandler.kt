@@ -1,4 +1,4 @@
-package jp.lionas.alexa.fundra
+package jp.lionas.alexa.fundra.handler
 
 import com.amazon.ask.Skill
 import com.amazon.ask.SkillStreamHandler
@@ -17,6 +17,9 @@ class FundraStreamHandler() : SkillStreamHandler(skill) {
                             HelpIntentHandler(),
                             LaunchRequestHandler(),
                             SessionEndedRequestHandler())
+                    .addExceptionHandler(
+                            FundraExceptionHandler()
+                    )
                     .build()
     }
 

@@ -1,4 +1,4 @@
-package jp.lionas.alexa.fundra
+package jp.lionas.alexa.fundra.handler
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import com.amazon.ask.dispatcher.request.handler.RequestHandler

@@ -1,16 +1,16 @@
-package jp.lionas.alexa.fundra.mufg
+package jp.lionas.alexa.fundra.api
 
 import com.google.gson.Gson
-import jp.lionas.alexa.fundra.mufg.model.CodeItem
-import jp.lionas.alexa.fundra.mufg.model.CodeList
-import jp.lionas.alexa.fundra.mufg.model.FundItem
-import jp.lionas.alexa.fundra.mufg.model.LatestFund
+import jp.lionas.alexa.fundra.model.CodeItem
+import jp.lionas.alexa.fundra.model.CodeList
+import jp.lionas.alexa.fundra.model.FundItem
+import jp.lionas.alexa.fundra.model.LatestFund
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
 import java.util.ArrayList
 
-class MufgFund {
+class MufgFundApi {
 
     companion object {
 

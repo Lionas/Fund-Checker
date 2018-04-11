@@ -1,4 +1,4 @@
-package jp.lionas.alexa.fundra.mufg.model
+package jp.lionas.alexa.fundra.model
 
 class LatestFund {
 

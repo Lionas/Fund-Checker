@@ -1,4 +1,4 @@
-package jp.lionas.alexa.fundra
+package jp.lionas.alexa.fundra.handler
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import com.amazon.ask.dispatcher.request.handler.RequestHandler
@@ -20,6 +20,7 @@ class LaunchRequestHandler : RequestHandler {
                 .withSpeech(Message.LAUNCH_SPEECH_TEXT)
                 .withSimpleCard(Message.SKILL_NAME, Message.LAUNCH_SPEECH_TEXT)
                 .withReprompt(Message.LAUNCH_SPEECH_TEXT)
+                .withShouldEndSession(false)
                 .build()
     }
 

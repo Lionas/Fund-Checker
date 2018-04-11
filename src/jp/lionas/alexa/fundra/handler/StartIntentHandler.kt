@@ -1,15 +1,16 @@
-package jp.lionas.alexa.fundra
+package jp.lionas.alexa.fundra.handler
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput
 import com.amazon.ask.dispatcher.request.handler.RequestHandler
 import com.amazon.ask.model.Response
-import jp.lionas.alexa.fundra.mufg.FundUtil
-import jp.lionas.alexa.fundra.mufg.MufgFund
+import jp.lionas.alexa.fundra.util.FundUtil
+import jp.lionas.alexa.fundra.api.MufgFundApi
 import jp.lionas.alexa.fundra.def.State
 import java.util.Optional
 
 import com.amazon.ask.request.Predicates.intentName
 import com.amazon.ask.request.Predicates.sessionAttribute
+import jp.lionas.alexa.fundra.util.SlotUtil
 import jp.lionas.alexa.fundra.def.Message
 import jp.lionas.alexa.fundra.def.Intent
 import jp.lionas.alexa.fundra.def.Query
@@ -36,7 +37,7 @@ class StartIntentHandler : RequestHandler {
             sessionAttributes[State.FUND_NAME] = fundName
         }
 
-        val found = MufgFund.findFund(fundName)
+        val found = MufgFundApi.findFund(fundName)
         val noData = if (!fundName.isEmpty()) String.format(Message.NOT_FOUND, fundName) else Message.NO_SPOKEN
 
         return when {
@@ -47,6 +48,7 @@ class StartIntentHandler : RequestHandler {
                 handlerInput.responseBuilder
                         .withSpeech(noData)
                         .withSimpleCard(Message.SKILL_NAME, noData)
+                        .withShouldEndSession(true)
                         .build()
             }
 

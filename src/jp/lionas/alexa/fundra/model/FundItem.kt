@@ -1,4 +1,4 @@
-package jp.lionas.alexa.fundra.mufg.model
+package jp.lionas.alexa.fundra.model
 
 import com.google.gson.annotations.SerializedName
 
